@@ -102,12 +102,4 @@ public class MyList implements List {
         };
     }
     
-    @Override
-    public void sortedInsert(final Comparable e) {
-        MyList cur = this;
-        while (!cur.isEmpty() && e.compareTo(cur.first()) > 0) {
-            cur = cur.next;
-        }
-        cur.insert(e);
-    }
 }
