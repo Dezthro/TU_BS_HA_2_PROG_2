@@ -12,8 +12,15 @@ public class MyStack implements Stack {
         public Node(Entry pEntry) {
     
             entry = pEntry;
-            node = null;
+            next = null;
     
+        }
+        
+        public Node(Entry pEntry, Node pNext) {
+        
+            entry = pEntry;
+            next = pNext;
+        
         }
     
         public void setNext(Node pNext) {
@@ -38,13 +45,7 @@ public class MyStack implements Stack {
         public boolean hasNext() {
         
             return (next != null) ? true : false;
-        
-        }
-        
-        public String toString() {
-        
-            return entry.toString();
-        
+            
         }
   
     }
@@ -74,6 +75,12 @@ public class MyStack implements Stack {
             temp.push(pStack.pop());
         
         }
+        
+        while(!temp.isEmpty()) {
+        
+            this.push(temp.pop());
+        
+        }
     
     }
     
@@ -92,13 +99,7 @@ public class MyStack implements Stack {
         
         } else {
         
-            Node temp = this.element();
-            while(temp.hasNext()) {
-            
-                temp = temp.getNext();
-            
-            }
-            temp.setNext(new Node(pNew));
+            peek = new Node(pNew, this.peek());
         
         }
     
@@ -112,8 +113,8 @@ public class MyStack implements Stack {
         
         } else {
         
-            temp = this.element();
-            first = temp.getNext();
+            temp = this.peek();
+            peek = temp.getNext();
             return temp.getEntry();
         
         }
