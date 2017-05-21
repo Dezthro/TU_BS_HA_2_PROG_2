@@ -5,7 +5,7 @@ public class MyQueue implements Queue{
     public class Node {
   
         // Variabeln
-        private Entry entry;
+        private Entry<T> entry;
         private Node next;
     
         // Konstruktor
@@ -23,7 +23,7 @@ public class MyQueue implements Queue{
         }
         
         // Methoden
-        public Entry getEntry() {
+        public Entry<T> getEntry() {
         
             return entry;
         
@@ -59,7 +59,7 @@ public class MyQueue implements Queue{
     
     }
     
-    public MyQueue(Entry pEntry) {
+    public MyQueue(Entry<T> pEntry) {
     
         first = new Node(pEntry);
     
@@ -76,13 +76,19 @@ public class MyQueue implements Queue{
     }
     
     // Methoden
-    public Entry element() {
+    public boolean isEmpty() {
+    
+        return (this.element() != null) ? true : false;
+    
+    }
+    
+    public Entry<T> element() {
     
         return first;
     
     }
     
-    public void add(Entry pNew) {
+    public void add(Entry<T> pNew) {
     
         if(this.isEmpty()) {
         
@@ -104,13 +110,13 @@ public class MyQueue implements Queue{
     
     public Entry remove() {
     
-        if(this.element() == null) {
+        if(this.isEmpty()) {
         
             return null;
         
         } else {
         
-            temp = this.element();
+            Node temp = this.element();
             first = temp.getNext();
             return temp.getEntry();
         

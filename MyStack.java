@@ -5,18 +5,18 @@ public class MyStack implements Stack {
     public class Node {
   
         // Variabeln
-        private Entry entry;
+        private Entry<T> entry;
         private Node next;
     
         // Konstruktor
-        public Node(Entry pEntry) {
+        public Node(Entry<T> pEntry) {
     
             entry = pEntry;
             next = null;
     
         }
         
-        public Node(Entry pEntry, Node pNext) {
+        public Node(Entry<T> pEntry, Node pNext) {
         
             entry = pEntry;
             next = pNext;
@@ -30,7 +30,7 @@ public class MyStack implements Stack {
         }
         
         // Methoden
-        public Entry getEntry() {
+        public Entry<T> getEntry() {
         
             return entry;
         
@@ -60,7 +60,7 @@ public class MyStack implements Stack {
     
     }
     
-    public MyStack(Entry pEntry) {
+    public MyStack(Entry<T> pEntry) {
     
         peek = new Node(pEntry);
     
@@ -85,13 +85,19 @@ public class MyStack implements Stack {
     }
     
     // Methoden
-    public Entry peek() {
+    public boolean isEmpty() {
+    
+        return (this.peek() != null) ? true : false;
+    
+    }
+    
+    public Node peek() {
     
         return peek;
     
     }
     
-    public void push(Entry pNew) {
+    public void push(Entry<T> pNew) {
     
         if(this.isEmpty()) {
         
@@ -107,13 +113,13 @@ public class MyStack implements Stack {
     
     public Entry pop() {
     
-        if(this.peek() == null) {
+        if(this.isEmpty()) {
         
             return null;
         
         } else {
         
-            temp = this.peek();
+            Node temp = this.peek();
             peek = temp.getNext();
             return temp.getEntry();
         

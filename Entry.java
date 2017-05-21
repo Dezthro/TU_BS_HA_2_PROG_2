@@ -1,3 +1,5 @@
+package advancedList;
+
 import java.util.Arrays;
 
 /**
@@ -6,39 +8,31 @@ import java.util.Arrays;
  * @author Jane Doe 1234567 Group 42h
  * @author John Doe 1234567 Group 42h
  */
-public class Entry implements Comparable {
+public class Entry<T> implements Comparable<T> {
 
     /**
      * the integer array with a length of 3
      */
-    private final Integer[] values;
+    private final Object<T> object;
 
     /**
      * creates a new entry object with the given array
      * @param values the integer array
      */
-    public Entry(final Integer[] values) {
-        if (values == null || values.length != 3) {
+    public Entry(final Object<T> pObject) {
+        if (pObjecr == null) {
             throw new IllegalArgumentException("wrong content");
         }
-        this.values = values;
+        this.object = pObject;
     }
 
     @Override
-    public int compareTo(final Object o) {
-        Entry e = (Entry) o;
-        if (Integer.compare(values[0], e.values[0]) == 0) {
-            if (Integer.compare(values[1], e.values[1]) == 0) {
-                return Integer.compare(values[2], e.values[2]);
-            } else {
-                return Integer.compare(values[1], e.values[1]);
-            }
-        }
-        return Integer.compare(values[0], e.values[0]);
+    public int compareTo(T o) {
+        Entry<T> e = (Entry<T>) o;
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -46,7 +40,7 @@ public class Entry implements Comparable {
             return false;
         }
 
-        final Entry entry = (Entry) o;
+        final Entry<T> entry = (Entry<T>) o;
         return Arrays.equals(values, entry.values);
     }
     
@@ -54,4 +48,5 @@ public class Entry implements Comparable {
     public String toString() {
         return "Entry" + Arrays.toString(values);
     }
+
 }
