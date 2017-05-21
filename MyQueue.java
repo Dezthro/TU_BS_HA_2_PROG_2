@@ -76,6 +76,12 @@ public class MyQueue implements Queue{
     }
     
     // Methoden
+    public boolean isEmpty() {
+    
+        return (this.element() != null) ? true : false;
+    
+    }
+    
     public Entry<T> element() {
     
         return first;
@@ -104,7 +110,7 @@ public class MyQueue implements Queue{
     
     public Entry remove() {
     
-        if(this.element() == null) {
+        if(this.isEmpty()) {
         
             return null;
         
