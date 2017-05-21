@@ -1,3 +1,5 @@
+package advancedList;
+
 import de.tu_bs.ips.List;
 
 import java.util.Iterator;
@@ -10,24 +12,24 @@ import java.util.NoSuchElementException;
  * @author Jane Doe 1234567 Group 42h
  * @author John Doe 1234567 Group 42h
  */
-public class MyList implements List {
+public class MyList<E> implements List<E> {
     /**
      * next pointer to the next list element
      */
-    private MyList next;
+    private MyList<E> next;
     /**
      * previous pointer to the previous list element
      */
-    private MyList prev;
+    private MyList<E> prev;
     /**
      * the item / element
      */
-    private Comparable entry;
+    private MyList<E> entry;
 
     /**
      * creates a new List
      */
-    public MyList() {
+    public MyList () {
         next = this;
         prev = this;
     }
@@ -39,7 +41,7 @@ public class MyList implements List {
 
     @Override
     public int length() {
-        MyList cur = this;
+        MyList<E> cur = this;
         int l = 0;
         while (!cur.isEmpty()) {
             cur = cur.next;
@@ -49,13 +51,13 @@ public class MyList implements List {
     }
 
     @Override
-    public Comparable first() {
+    public MyList<E> first() {
         return next.entry;
     }
 
     @Override
-    public void insert(final Comparable e) {
-        MyList newEntry = new MyList();
+    public void insert(final E e) {
+        MyList<E> newEntry = new MyList<E>();
         newEntry.entry = e;
         newEntry.prev = this;
         newEntry.next = next;
@@ -64,13 +66,13 @@ public class MyList implements List {
     }
 
     @Override
-    public void append(final Comparable e) {
+    public void append(E e) {
         prev.insert(e);
     }
 
     @Override
-    public void delete(final Comparable e) {
-        MyList cur = this;
+    public void delete(E e) {
+        MyList<E> cur = this;
         while (!cur.isEmpty() && !e.equals(cur.first())) {
             cur = cur.next;
         }
@@ -83,7 +85,7 @@ public class MyList implements List {
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            private MyList current = MyList.this;
+            private MyList<E> current = MyList<E>.this;
 
             @Override
             public boolean hasNext() {
@@ -91,23 +93,17 @@ public class MyList implements List {
             }
 
             @Override
-            public Comparable next() {
+            public Comparable<T> next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException("");
                 }
-                Comparable e = current.first();
+                Comparable<T> e = current.first();
                 current = current.next;
                 return e;
             }
         };
     }
     
-    @Override
-    public void sortedInsert(final Comparable e) {
-        MyList cur = this;
-        while (!cur.isEmpty() && e.compareTo(cur.first()) > 0) {
-            cur = cur.next;
-        }
-        cur.insert(e);
-    }
+    
+
 }
